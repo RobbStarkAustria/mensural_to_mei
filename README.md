@@ -23,6 +23,7 @@ The project presented here offers an automated method for converting these scann
     - [Test Model](#test-model)
   - [Changelog](#changelog)
   - [Contribution](#contribution)
+  - [Usage of this software](#usage-of-this-software)
 
 ## Project Overview
 Scanned documents serve to protect original materials from loss or damage, while enabling global access. However, further electronic processing, such as conversion to [**Music Encoding Initiative**](https://music-encoding.org) (MEI) or [**Humdrum**](https://www.humdrum.org/) formats, typically requires manual intervention, which is both labor-intensive and time-consuming. The present project addresses this issue by employing specially trained object recognition networks to identify the symbols of white mensural notation and convert them into MEI or Humdrum formats. Users can feed scanned documents in image or PDF format and receive the converted data as output.  (**Restriction**: Currently, only the most common and important symbols are recognised and transferred.; text transfer is part of the further development of the project. Some symbols of the white mensural notation are not yet implemented in the MEI-format.) 
@@ -185,3 +186,21 @@ Changes to the project are documented in the following file: [CHANGELOG](docs/CH
 ## Contribution
 
 We're always looking for ways to improve, so please report any problems or requests in the appropriate sections of this repository.
+
+## Usage of this software
+You are free to use this software (see licence) or parts of this software. If you use parts of our package, please cite our paper.
+
+```
+@article{NowitzkiETAL,
+    doi = {10.3366/ijhac.2022.0275},
+    author = {Nowitzki, Olaf AND Engelhardt-Nowitzki, Corinna AND Fiala, Martin L. AND Wöber, Wilfried},
+    journal = {International Journal of Humanities and Arts Computing},
+    publisher = {Edinburgh University Press},
+    title = {Optical Music Recognition of Printed White Mensural Notation: Conversation to Modern Notation using Object Detection Mechanisms},
+    year = {2022},
+    volume = {16},
+    url = {https://doi.org/10.3366/ijhac.2022.0275},
+    pages = {33-49},
+    number = {1},
+}
+```
