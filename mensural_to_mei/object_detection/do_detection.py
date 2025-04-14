@@ -86,6 +86,7 @@ def do_detection(list_of_images: list) -> dict:
     SYMBOL_CLASSES = load_yaml(config.LABEL_PATHES['symbols'])
 
     all_found_symbols = {}
+    all_found_single_symbols = {}
     for image_path in list_of_images:
         filename = os.path.splitext(os.path.basename(image_path))[0]
         cprint(f"Processing {filename}", "blue")
@@ -101,12 +102,13 @@ def do_detection(list_of_images: list) -> dict:
 
         cv2.imwrite(temp_path, grayscale_image)
 
-        file_symbols = detect_symbols(staffs, grayscale_image, SYMBOL_CLASSES)
+        file_symbols, file_single_symbols = detect_symbols(staffs, grayscale_image, SYMBOL_CLASSES)
         number_of_staffs = len(file_symbols)
         number_of_symbols = count_elements(file_symbols)
 
         end = time.time()
         cprint(f"Found {number_of_symbols} symbols in {number_of_staffs} staffs in {end - start} seconds", "green")
         all_found_symbols[filename] = file_symbols
+        all_found_single_symbols[filename] = file_single_symbols
 
-    return all_found_symbols
+    return all_found_symbols, all_found_single_symbols

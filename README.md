@@ -108,7 +108,7 @@ Download the models, and unzip them into the root project folder. This will crea
 Example to download the test model in linux terminal or server:
 ```
 pip install gdown
-gdown https://drive.google.com/uc?export=download&id=1Qw-XAVJv5GrC_AtZ1z0DqwN5MXJYD1Qa
+gdown https://drive.google.com/uc?id=1Qw-XAVJv5GrC_AtZ1z0DqwN5MXJYD1Qa
 ```
 
 ### Configuration
@@ -133,7 +133,7 @@ Possible Parameters:
 
 To generate the image shown from the PDF file supplied, the following command line must be entered in the project directory:
 
-`python mensural_to_mei.py --source './Rosso - Motteti di gio.PDF' --pages 9`
+`python mensural_to_mei.py --source './Rosso - Motteti di gio.pdf' --pages 9`
 
 **Note**: Only a smaller model for object recognition and pitch classification is provided for testing. The conversion result may differ from the example shown.
 

@@ -82,7 +82,11 @@ def conversion_pipeline(
     
     image_sources = select_sources(source, pages)
     
-    all_found_symbols = do_detection(image_sources)
+    all_found_symbols, all_found_single_symbols = do_detection(image_sources)
+    
+    if config.DEBUG_MODE:
+        with open("all_found_single_symbols.pkl", "wb") as f:
+            pickle.dump(all_found_single_symbols, f, protocol=pickle.HIGHEST_PROTOCOL)
 
     symbols_and_pitches = detect_pitches(all_found_symbols)
     
@@ -90,6 +94,7 @@ def conversion_pipeline(
         # save detection for debug of following function to avoid unnecessary detection steps
         with open("symbols_and_pitches.pkl", "wb") as f:
             pickle.dump(symbols_and_pitches, f, protocol=pickle.HIGHEST_PROTOCOL)
+
     
     convert_to_mei_and_humdrum(symbols_and_pitches, humdrum)
 

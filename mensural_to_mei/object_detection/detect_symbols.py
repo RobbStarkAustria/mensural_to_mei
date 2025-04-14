@@ -18,6 +18,7 @@ Please refer to the docstring of the `detect_symbols` function for more
 details about its parameters and return value.
 """
 
+import copy
 import math
 import cv2
 import numpy as np
@@ -71,6 +72,7 @@ def detect_symbols(
                                    )
 
     staff_symbols = []
+    single_symbols = []
     for staff in tqdm(staffs, desc='Detecting symbols'):
         staff_image = image[staff[1]:staff[3], staff[0]:staff[2]]
 
@@ -88,16 +90,27 @@ def detect_symbols(
 
         symbol_list = [[box[0], box[1], box[2], box[3], classes[label]] for box, label in zip(boxes, labels) if label in classes]
 
+        single_symbol_list = copy.deepcopy(symbol_list)
+
         for symbol in symbol_list:
             symbol[0] = max(0, math.floor((symbol[0] - padding[2]) / resize_factor + staff[0]))
             symbol[1] = max(0, math.floor(staff[1]))
             symbol[2] = min(image.shape[1], math.floor((symbol[2] - padding[2]) / resize_factor + staff[0]))
             symbol[3] = min(image.shape[0], math.floor(staff[3]))
 
+        for symbol in single_symbol_list:
+            symbol[0] = max(0, math.floor((symbol[0] - padding[2]) / resize_factor + staff[0]))
+            symbol[1] = max(0, math.floor((symbol[1] - padding[0]) / resize_factor + staff[1]))
+            symbol[2] = min(image.shape[1], math.floor((symbol[2] - padding[2]) / resize_factor + staff[0]))
+            symbol[3] = min(image.shape[0], math.floor((symbol[3] - padding[0]) / resize_factor + staff[1]))
+
         sorted_symbols = sorted(symbol_list, key=lambda box: box[0])
+        sorted_single_symbols = sorted(single_symbol_list, key=lambda box: box[0])
+
 
         staff_symbols.append(sorted_symbols)
+        single_symbols.append(sorted_single_symbols)
     
 
-    return staff_symbols
+    return staff_symbols, single_symbols
 
